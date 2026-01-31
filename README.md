@@ -41,6 +41,14 @@
 
 ---
 
+## Как скачать и запустить проект локально
+
+* Клонируйте репозиторий
+```bash
+git clone https://github.com/egortelushkin/xml-parser-test-sm.git
+cd xml-parser-test-sm
+```
+
 ## ▶️ Запуск проекта
 
 ### Сборка Docker-образа
