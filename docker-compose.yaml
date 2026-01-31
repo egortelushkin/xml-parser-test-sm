@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:17
+    container_name: xml_pg
+    environment:
+      POSTGRES_DB: xmltest
+      POSTGRES_USER: egor
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: xml_app
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: xmltest
+      DB_USER: egor
+      DB_PASSWORD: password123
+    # не обязательно мапить порты для консольного приложения
+
+volumes:
+  pgdata:
