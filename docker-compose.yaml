@@ -1,28 +1,25 @@
 services:
   db:
-    image: postgres:17
-    container_name: xml_pg
+    image: postgres:15
+    container_name: xmltest_db
     environment:
-      POSTGRES_DB: xmltest
       POSTGRES_USER: egor
       POSTGRES_PASSWORD: password123
+      POSTGRES_DB: xmltest
+    volumes:
+      - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
 
-  app:
+  updater:
     build: .
-    container_name: xml_app
+    container_name: xml-parser-updater
     depends_on:
       - db
     environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: xmltest
+      DB_URL: jdbc:postgresql://db:5432/xmltest
       DB_USER: egor
-      DB_PASSWORD: password123
-    # не обязательно мапить порты для консольного приложения
+      DB_PASS: password123
 
 volumes:
-  pgdata:
+  db_data:
