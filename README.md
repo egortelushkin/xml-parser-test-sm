@@ -1,57 +1,57 @@
 # XML Parser & Database Updater
 
-Консольное приложение для парсинга XML-файла (на самом деле формат YML^-^) и синхронизации данных с базой данных PostgreSQL
+A console application for parsing an XML file (actually in YML format ^-^) and synchronizing data with a PostgreSQL database.
 
-Проект полностью запускается в Docker и не требует установленной Java или PostgreSQL
+The project runs entirely in Docker and does not require Java or PostgreSQL installed locally.
 
 ---
 
-## Возможности
+## Features
 
-* Парсинг XML с разделами:
+* Parse XML with sections:
 
   * `currencies`
   * `categories`
   * `offers`
-* Автоматическое создание таблиц в БД
-* Проверка структуры таблиц перед обновлением
-* Обновление одной таблицы или всех сразу
-* Просмотр списка таблиц
-* Генерация DDL таблиц
+* Automatic creation of database tables
+* Table structure validation before updating
+* Update a single table or all tables at once
+* View list of tables
+* Generate table DDL
 
 ---
 
-## Стек технологий
+## Technology Stack
 
-* Java (через Groovy-скрипт)
+* Java (via Groovy script))
 * PostgreSQL
 * Docker / Docker Compose
 * JDBC
 
 ---
 
-## ⚙️ Требования
+## ⚙️ Requirements
 
-На компьютере должен быть установлен только:
+The only software needed on your computer:
 
 * Docker
 * Docker Compose
 
-Никаких других зависимостей не требуется.
+No other dependencies required.
 
 ---
 
-## Как скачать и запустить проект локально
+## How to Download and Run the Project Locally
 
-* Клонируйте репозиторий
+* Clone the repository
 ```bash
 git clone https://github.com/egortelushkin/xml-parser-test-sm.git
 cd xml-parser-test-sm
 ```
 
-## ▶️ Запуск проекта
+## ▶️ Running the Project
 
-### Сборка Docker-образа
+### Build Docker Image
 
 ```bash
 docker compose build --no-cache
@@ -59,55 +59,54 @@ docker compose build --no-cache
 
 ---
 
-### Запуск приложения
+### Launch the Application
 
 ```bash
 docker compose run --rm -it updater
 ```
 
-После запуска приложение отобразит интерактивное меню
+After launching, the application will display an interactive menu.
 
 ---
 
-## Консольное меню
+## Console Menu
 
 ```
-1. Показать таблицы
-2. Показать DDL таблицы
-3. Обновить таблицу
-4. Обновить все таблицы
-5. Выйти
+1. Show tables
+2. Show table DDL
+3. Update table
+4. Update all tables
+5. Exit
 ```
 
-### Описание пунктов:
+### Menu Options Description:
 
-* **1 Показать таблицы**
-  Выводит список таблиц, доступных в БД
+* **1 Show tables**
+  Displays the list of tables available in the database
 
-* **2 Показать DDL таблицы**
-  Показывает SQL структуру выбранной таблицы
+* **2 Show table DDL**
+  Shows the SQL structure of the selected table
 
-* **3 Обновить таблицу**
-  Обновляет данные только одной выбранной таблицы
+* **3 Update table**
+  Updates data in a single selected table
 
-* **4 Обновить все таблицы**
-  Последовательно обновляет ВСЕ РАЗДЕЛЫ
+* **4 Sequentially updates ALL SECTIONS**
+  Sequentially updates ALL SECTIONS
 
-* **5 Выйти**
-  Завершает работу приложения.
+* **5 Exit**
 
 ---
 
-## Особенности реализации
+## Implementation Notes
 
-### Нормализация пользовательского ввода
+### Normalizing User Input
 
-Для корректной работы в Windows + Docker используется очистка ввода:
+To ensure correct operation on Windows + Docker, input is cleaned by:
 
-* удаляются BOM и спецсимволы
-* приводится к lowercase
+* Removing BOM and special characters
+* Converting to lowercase
 
-Это предотвращает ошибки вида:
+This prevents errors like:
 
 ```
 Unknown table: offers
@@ -115,7 +114,7 @@ Unknown table: offers
 
 ---
 
-## Полный сброс окружения (если что-то пошло не так)
+## Full Environment Reset (if something goes wrong)
 
 ```bash
 docker compose down -v
@@ -126,16 +125,16 @@ docker compose run --rm -it updater
 
 ---
 
-## Назначение проекта
+## Project Purpose
 
-Выполнен как тестовое задание
+Created as a test assignment
 ---
 
-## Возможные улучшения
+## Possible Improvements
 
-* Сохранение `<param>` у `offer` в JSON
-* Логирование ошибок по строкам
-* REST API поверх данных
+* Save <param> of offer as JSON
+* Log errors per row
+* Add REST API on top of the data
 
 ---
 
